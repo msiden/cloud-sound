@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  db:
+    image: "postgres:14.1-alpine"
+    environment:
+      POSTGRES_USER: reason
+      POSTGRES_PASSWORD: reason
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - 80:8080
+    volumes:
+      - ./frontend/src:/app/src
+
+  file_store:
+    hostname: file-store
+    build:
+      context: file-store/
+    ports:
+      - 8081:3000
+    volumes:
+      - file_store:/usr/src/app/data
+
+  cloud_sound:
+    hostname: cloud-sound
+    build:
+      context: cloud-sound/
+    volumes:
+      - ./cloud-sound/src:/usr/src/app/src
+    ports:
+      - 8080:8080
+
+  user_api:
+    build:
+      context: user/
+    ports:
+      - 8080
+
+networks:
+  default:
+    name: space_network
+
+volumes:
+  file_store:

@@ -1,0 +1,23 @@
+{
+  "name": "backend-take-home-test",
+  "version": "1.0.0",
+  "description": "Take-home-test for recruitment of new fullstack/devops developers for the web/backend team.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/propellerheads/backend-take-home-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/propellerheads/backend-take-home-test/issues"
+  },
+  "homepage": "https://github.com/propellerheads/backend-take-home-test#readme",
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-plugin-react": "^7.28.0"
+  }
+}
