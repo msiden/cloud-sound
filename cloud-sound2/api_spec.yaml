@@ -1,0 +1,111 @@
+openapi: 3.0.0
+
+info:
+  title: Load times service
+  version: 0.0.1
+
+paths:
+  /sounds:
+    get:
+      operationId: endpoints.sounds
+      summary: Returns a list of available sound files
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sounds:
+                    type: array
+        '500':
+          description: Error
+
+  /new_user:
+    post:
+      operationId: endpoints.new_user
+      summary: Create a new user
+      parameters:
+      - name: user_id
+        in: query
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Ok
+        '409':
+          description: Conflict
+        '500':
+          description: Error
+
+  # /upload:
+  #   post:
+  #     operationId: endpoints.upload
+  #     summary: Upload a new sound file
+  #     parameters:
+  #     - name: user_id
+  #       in: query
+  #       required: true
+  #       schema:
+  #         type: integer
+  #     - name: file_name
+  #       in: query
+  #       required: true
+  #       schema:
+  #         type: string
+  #     responses:
+  #       '200':
+  #         description: Ok
+  #       '404':
+  #         description: "User id doesn't exist in database"
+  #       '500':
+  #         description: Error
+
+  /upload:
+    post:
+      operationId: endpoints.upload
+      summary: Upload a new sound file
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Ok
+        '404':
+          description: "User id doesn't exist in database"
+        '500':
+          description: Error
+
+  /delete:
+    delete:
+      operationId: endpoints.delete
+      summary: Delete an exisitng sound file
+      parameters:
+      - name: file_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Ok
+        '404':
+          description: File not found
+        '500':
+          description: Error
