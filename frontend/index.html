@@ -7,16 +7,29 @@
   </head>
 
   <body>
+    <h3>Create new user</h3>
+
+    <form id="newUserId">
+      <input type="text" id="userId"/>
+      <button type="submit">Create user</button>
+    </form>
+
+    <div class="user">
+
+    </div>
+
     <h3>Upload new song</h3>
 
-    <button onclick="helloWorld()">CLICK</button>
-
-    <form action="/">
-      <input type="file" name="file" />
-      <button type="submit">Submit</button>
+    <form class="uploadForm">
+      <input type="file" name="file" id="uploadFile"/>
+      <button type="submit">Upload song</button>
     </form>
+
     <hr/>
+
     <h3>Uploaded songs</h3>
-    <div class="songs"></div>
+    <div class="songs">
+
+    </div>
   </body>
 </html>

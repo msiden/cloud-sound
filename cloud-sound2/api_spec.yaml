@@ -40,29 +40,6 @@ paths:
         '500':
           description: Error
 
-  # /upload:
-  #   post:
-  #     operationId: endpoints.upload
-  #     summary: Upload a new sound file
-  #     parameters:
-  #     - name: user_id
-  #       in: query
-  #       required: true
-  #       schema:
-  #         type: integer
-  #     - name: file_name
-  #       in: query
-  #       required: true
-  #       schema:
-  #         type: string
-  #     responses:
-  #       '200':
-  #         description: Ok
-  #       '404':
-  #         description: "User id doesn't exist in database"
-  #       '500':
-  #         description: Error
-
   /upload:
     post:
       operationId: endpoints.upload
