@@ -9,9 +9,7 @@ def sounds() -> dict:
 
 
 def new_user(user_id: int) -> int:
-    response = requests.get(f'http://user_api:8000/user/{user_id}')
-    if response.status_code == 404:
-        response = requests.post('http://user_api:8000/user', json={"id": user_id})
+    response = requests.post('http://user_api:8000/user', json={"id": user_id})
     return response.status_code
 
 

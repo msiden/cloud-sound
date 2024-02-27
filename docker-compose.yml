@@ -24,15 +24,6 @@ services:
     volumes:
       - file_store:/usr/src/app/data
 
-  # cloud_sound:
-  #   hostname: cloud-sound
-  #   build:
-  #     context: cloud-sound/
-  #   volumes:
-  #     - ./cloud-sound/src:/usr/src/app/src
-  #   ports:
-  #     - 8080:8080
-
   cloud_sound:
     hostname: cloud-sound
     build:

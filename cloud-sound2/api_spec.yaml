@@ -80,7 +80,7 @@ paths:
         schema:
           type: integer
       responses:
-        '200':
+        '204':
           description: Ok
         '404':
           description: File not found

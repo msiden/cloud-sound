@@ -6,14 +6,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from sqlalchemy.exc import OperationalError
+from sqlalchemy_utils import database_exists, create_database
 from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
 import uuid
 import datetime
 
 
-
-engine = create_engine("sqlite:///database.db")
-
+engine = create_engine("postgresql+psycopg2://reason:reason@db:5432/songs")
+if not database_exists(engine.url):
+    create_database(engine.url)
 
 class Base(DeclarativeBase):
     pass
@@ -74,7 +75,7 @@ def get_data() -> dict:
 
 def delete(file_id: str, user_id: int) -> int:
     with Session(engine) as session:
-        query = session.query(Files).filter(and_((Files.id==file_id), (Files.created_by==user_id)))
+        query = session.query(Files).filter(and_((Files.id==file_id), (Files.created_by==str(user_id))))
         count = query.count()
         query.delete()
         session.commit()
@@ -82,8 +83,3 @@ def delete(file_id: str, user_id: int) -> int:
 
 
 create_all()
-
-# insert_data("file1.mp3", 1)
-# insert_data("file2.mp3", 1)
-# insert_data("test.wav", 2)
-# insert_data("file1.mp3", 3)
