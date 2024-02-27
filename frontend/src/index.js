@@ -34,7 +34,7 @@ fetch('http://localhost:8080/sounds').then((response) => {
 
 function createUser(event) {
   event.preventDefault();
-  let newUserId = parseInt(document.getElementById("userId").value);
+  const newUserId = parseInt(document.getElementById("userId").value);
   let content
 
   fetch(`http://localhost:8080/new_user?user_id=${newUserId}`, {method: 'POST'}).then((response) => {
@@ -51,5 +51,41 @@ function createUser(event) {
   });
 }
 
-let userForm = document.getElementById("newUserId");
+function upload(event) {
+  event.preventDefault();  
+  
+  const formData = new FormData(event.target);
+ 
+  fetch('http://localhost:8080/upload', {
+    method: 'POST',
+    body: formData,
+  }).then(() => {    
+    window.location.reload();
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+function deleteFile(event) {
+  event.preventDefault();  
+  
+  const userId = parseInt(document.getElementById("deleteUserId").value);
+  const fileId = document.getElementById("fileId").value;
+  
+  fetch(`http://localhost:8080/delete?file_id=${fileId}&user_id=${userId}`, {
+    method: 'DELETE'
+  }).then(() => {   
+    window.location.reload();
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+const userForm = document.getElementById("newUserId");
 userForm.addEventListener('submit', createUser);
+
+const uploadForm = document.getElementById("uploadForm");
+uploadForm.addEventListener('submit', upload);
+
+const deleteForm = document.getElementById("deleteForm");
+deleteForm.addEventListener('submit', deleteFile);
